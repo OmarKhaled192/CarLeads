@@ -3,9 +3,11 @@
 - main goal of this app to pickup possible leads ,their potentials, update them information to select actual potential from all potentials.
 
 # 🚀 Get started here
-
-##### **Firstly,** run your app on _**baseUrl**_ = _localhost:3000_
-
+- open cmd on diectory of API file, then run this commands:
+- npm init
+- npm install
+- npm start => equal to this [nodemon leads-api.js]
+  
 ## 🔖 **How to use this template**
 
 ## 1.**GetAllLeads api:**
