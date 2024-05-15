@@ -48,11 +48,13 @@ export class PotentialsComponent implements OnInit {
         this.countSuccess ++;
         if(this.countSuccess == 2) {
           this.error500 = false;
+          $('.loading').fadeOut(1000);
         }
       },
       error: (err) => {
         console.log(err);
         this.countSuccess = 0;
+        $('.loading').fadeOut(1000);
       }
     })
   }
@@ -65,12 +67,14 @@ export class PotentialsComponent implements OnInit {
         this.countSuccess++;
         if(this.countSuccess == 2) {
           this.error500 = false;
+          $('.loading').fadeOut(1000);
         }
       },
       error: (err) => {
         console.log(err)
         this.error500 = true;
         this.countSuccess = 0;
+        $('.loading').fadeOut(1000);
       }
     })
   }
@@ -81,6 +85,7 @@ export class PotentialsComponent implements OnInit {
       next: (res) => {
         // we need here to update page without refresh, so we call again getAllLeads() to update allLeads[]
         this.getAllLeads();
+        $('.loading').fadeOut(1000);
       },
       error: (err) => {
         console.log(err)
@@ -88,4 +93,11 @@ export class PotentialsComponent implements OnInit {
       }
     })
   }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    $('.loading').fadeIn(0)
+  }
+ 
 }
