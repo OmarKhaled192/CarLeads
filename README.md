@@ -7,3 +7,5 @@
 
 - then we add navbar to header component with a simple design,
 - update app-routing-module to make /home is a default endpoint in my app, and render home-Component to be a default.
+
+- then generate interface Lead to use in the service that we will build it to Consume date from api in this shape of it's Fields Name & DataType in this formula.
