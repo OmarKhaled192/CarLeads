@@ -14,6 +14,7 @@ export class PotentialsComponent implements OnInit {
   public allLeads?: Lead[];
   public allPotentials?: any[];
   public error500: boolean = false;
+  public error404: boolean = false;
   public countSuccess: number = 0;
 
   constructor(private _ActivatedRoute:ActivatedRoute, private _LeadsInfoService: LeadsInfoService) { }
@@ -48,12 +49,18 @@ export class PotentialsComponent implements OnInit {
         this.countSuccess ++;
         if(this.countSuccess == 2) {
           this.error500 = false;
+          this.error404 = false;
           $('.loading').fadeOut(1000);
         }
       },
       error: (err) => {
         console.log(err);
         this.countSuccess = 0;
+        if(err.status == 500) {
+          this.error500 = true;
+        } else if (err.status == 404) {
+          this.error404 = true;
+        }
         $('.loading').fadeOut(1000);
       }
     })
@@ -67,12 +74,17 @@ export class PotentialsComponent implements OnInit {
         this.countSuccess++;
         if(this.countSuccess == 2) {
           this.error500 = false;
+          this.error404 = false;
           $('.loading').fadeOut(1000);
         }
       },
       error: (err) => {
         console.log(err)
-        this.error500 = true;
+        if(err.status == 500) {
+          this.error500 = true;
+        } else if(err.status == 404) {
+          this.error404 = true;
+        }
         this.countSuccess = 0;
         $('.loading').fadeOut(1000);
       }
@@ -89,7 +101,11 @@ export class PotentialsComponent implements OnInit {
       },
       error: (err) => {
         console.log(err)
-        this.error500 = true;
+        if(err.status == 500) {
+          this.error500 = true;
+        } else if(err.status == 404) {
+          this.error404 = true;
+        }
       }
     })
   }
