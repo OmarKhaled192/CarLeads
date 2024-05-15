@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "a6bf91b1-523b-4b8b-b217-9bb7b41c412f",
+		"name": "Leads Api",
+		"description": "# 🚀 Get started here\n\n##### **Firstly,** run your app on _**baseUrl**_ = _localhost:3000_\n\n## 🔖 **How to use this template**\n\n## 1.**GetAllLeads api:**\n\n- get the last updated informations of all leads :\n- get request for base_url/api/leads\n    \n\n---\n\n## **2.G**etPotentialsByLeadId api:\n\n- get list of all potentials leads by lead id as shown:\n- get request for base_url/api/leads/:lead_id/potential-duplicates\n    \n\n``` json\n[\"b33f4c03-4bfb-40fc-887d-eefc5e9ca793\",\"ee7ccdb4-1f6b-46af-b683-f611bb95e4b9\",\"2799c903-6208-460e-8acc-63c6df3731a6\"]\n\n ```\n\n---\n\n## 3.**GetAllLeads api:**\n\n- update information of selected lead by give lead id\n- put request for base_url/api/leads/:lead_id\n- when send you must update information by give body json;\n- make sure that you selected body => row => json\n- body shown as :\n    \n    ``` json\n            {\n                \"first_name\": \"shelley\",\n                \"last_name\": \"padilla\",\n                \"lead_id\": \"b33f4c03-4bfb-40fc-887d-eefc5e9ca793\",\n                \"email\": \"spadilla@example.com\",\n                \"source\": \"MyDeal\",\n                \"home_phone\": \"5879927121\",\n                \"cell_phone\": \"\",\n                \"duplicate_of\": null\n            }\n    \n     ```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "25133904"
+	},
+	"item": [
+		{
+			"name": "getAllLeads",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/api/leads",
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "getPotentialsByLeadId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/leads/:lead_id/potential-duplicates",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"leads",
+						":lead_id",
+						"potential-duplicates"
+					],
+					"variable": [
+						{
+							"key": "lead_id",
+							"value": "b33f4c03-4bfb-40fc-887d-eefc5e9ca793"
+						}
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "updateLeadInfo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"shelley\",\n    \"last_name\": \"padilla\",\n    \"lead_id\": \"b33f4c03-4bfb-40fc-887d-eefc5e9ca793\",\n    \"email\": \"spadilla@example.com\",\n    \"source\": \"MyDeal\",\n    \"home_phone\": \"5879927121\",\n    \"cell_phone\": \"8999713\",\n    \"duplicate_of\": 212,\n    \"potential_duplicates\": [\"d89e80f9-eee5-431c-9b8b-6bff121ecd5d\", \"ee7ccdb4-1f6b-46af-b683-f611bb95e4b9\", \"2799c903-6208-460e-8acc-63c6df3731a6\"]\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/leads/:lead_id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"leads",
+						":lead_id"
+					],
+					"variable": [
+						{
+							"key": "lead_id",
+							"value": "d89e80f9-eee5-431c-9b8b-6bff121ecd5d"
+						}
+					]
+				},
+				"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}
