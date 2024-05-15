@@ -1,25 +1,37 @@
-<section class="row justify-content-start">
-  <div class="col-10 col-sm-6 col-md-5 col-lg-3 offset-sm-1 mt-5  bg-tertiary" *ngFor="let pid of allPotentials">
-    <ng-container *ngFor="let lead of allLeads">
-      <section class="card p-2" *ngIf="lead.lead_id == pid">
-        <i class="fa-solid fa-user-plus fa-5x text-center text-primary" *ngIf="lead.duplicate_of != leadId"></i>
-        <i class="fa-solid fa-user-check fa-5x text-center text-success" *ngIf="lead.duplicate_of == leadId"></i>
+<div *ngIf="!error500; else errorTemp;">
+  <section class="row justify-content-start" *ngIf="this.allPotentials?.length; else emptyTemp">
+    <div class="col-10 col-sm-6 col-md-5 col-lg-3 offset-sm-1 mt-5  bg-tertiary" *ngFor="let pid of allPotentials">
+      <ng-container *ngFor="let lead of allLeads">
+        <section class="card p-2" *ngIf="lead.lead_id == pid">
+          <i class="fa-solid fa-user-plus fa-5x text-center text-primary" *ngIf="lead.duplicate_of != leadId"></i>
+          <i class="fa-solid fa-user-check fa-5x text-center text-success" *ngIf="lead.duplicate_of == leadId"></i>
 
-        <article class="card-body">
-          <h4 class="card-title text-capitalize">{{lead.first_name}} {{lead.last_name}}</h4>
-          <p class="card-text">
-            <span class="h6">source: </span> {{lead.source}}
-          </p>
-          <a *ngIf="lead.duplicate_of != leadId" (click)="updateLeadInfo(lead, leadId)"
-            class="btn text-capitalize btn-outline-primary">
-            Select as Actual
-          </a>
-          <a *ngIf="lead.duplicate_of == leadId" (click)="updateLeadInfo(lead, null)"
-            class="btn text-capitalize btn-outline-danger">
-            make as UnSelected
-          </a>
-        </article>
-      </section>
-    </ng-container>
-  </div>
-</section>
+          <article class="card-body">
+            <h4 class="card-title text-capitalize">{{lead.first_name}} {{lead.last_name}}</h4>
+            <p class="card-text">
+              <span class="h6">source: </span> {{lead.source}}
+            </p>
+            <a *ngIf="lead.duplicate_of != leadId" (click)="updateLeadInfo(lead, leadId)"
+              class="btn text-capitalize btn-outline-primary">
+              Select as Actual
+            </a>
+            <a *ngIf="lead.duplicate_of == leadId" (click)="updateLeadInfo(lead, null)"
+              class="btn text-capitalize btn-outline-danger">
+              make as UnSelected
+            </a>
+          </article>
+        </section>
+      </ng-container>
+    </div>
+  </section>
+
+  <ng-template class="row flex-column justify-content-center" #emptyTemp>
+    <img src="assets/images/notFound.png" alt="error500 Image">
+    <button class="btn btn-danger text-capitalize" [routerLink]="['/home']">Go to home</button>
+  </ng-template>
+</div>
+
+<ng-template class="row flex-column justify-content-center" #errorTemp>
+  <img src="assets/images/error500.png" alt="error500 Image">
+  <button class="btn btn-danger text-capitalize" (click)="loadData()">try again please</button>
+</ng-template>

@@ -10,10 +10,11 @@ import { Lead } from '../Interfaces/lead';
 })
 export class PotentialsComponent implements OnInit {
 
- public leadId: string = "";
+  public leadId: string = "";
   public allLeads?: any[];
   public allPotentials?: any[];
-
+  public error500: boolean = false;
+  public countSuccess: number = 0;
 
   constructor(private _ActivatedRoute:ActivatedRoute, private _LeadsInfoService: LeadsInfoService) { }
 
@@ -42,9 +43,16 @@ export class PotentialsComponent implements OnInit {
     return this._LeadsInfoService.getAllPotentials(leadId).subscribe({
       next: (res) => {
         this.allPotentials = res;
+        console.log("potentials from here is ");
+        console.log(this.allPotentials?.length);
+        this.countSuccess ++;
+        if(this.countSuccess == 2) {
+          this.error500 = false;
+        }
       },
       error: (err) => {
         console.log(err);
+        this.countSuccess = 0;
       }
     })
   }
@@ -53,9 +61,16 @@ export class PotentialsComponent implements OnInit {
     return this._LeadsInfoService.getAllLeads().subscribe({
       next: (res) => {
         this.allLeads = res;
+        console.log(this.allLeads);
+        this.countSuccess++;
+        if(this.countSuccess == 2) {
+          this.error500 = false;
+        }
       },
       error: (err) => {
         console.log(err)
+        this.error500 = true;
+        this.countSuccess = 0;
       }
     })
   }
@@ -69,6 +84,7 @@ export class PotentialsComponent implements OnInit {
       },
       error: (err) => {
         console.log(err)
+        this.error500 = true;
       }
     })
   }
