@@ -1,1 +1,19 @@
-<p>home works!</p>
+<section class="all-cards mb-5" *ngIf="!error500; else errorTemp ">
+  <div class="row justify-content-center">
+    <section class="card col-10 col-sm-6 col-md-5 col-lg-3 offset-sm-1 py-4 mt-5 bg-tertiary" *ngFor="let lead of allLeads">
+      <i class="fa-solid fa-user-tag fa-5x text-center text-success"></i>
+      <article class="card-body">
+        <h4 class="card-title text-capitalize">{{lead.first_name}} {{lead.last_name}}</h4>
+        <p class="card-text">
+          <span class="h6">source: </span> {{lead.source}}
+        </p>
+        <a [routerLink]="['/potentialsOf/'.concat(lead.lead_id)]" class="btn btn-outline-success text-capitalize">show potentials</a>
+      </article>
+    </section>
+  </div>
+</section>
+
+<ng-template class="row flex-column justify-content-center" #errorTemp>
+  <img src="assets/images/error500.png" alt="error500 Image">
+  <button class="btn btn-danger text-capitalize" (click)="getAllLeads()">try again please</button>
+</ng-template>
