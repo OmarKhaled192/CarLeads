@@ -11,7 +11,7 @@ import { Lead } from '../Interfaces/lead';
 export class PotentialsComponent implements OnInit {
 
   public leadId: string = "";
-  public allLeads?: any[];
+  public allLeads?: Lead[];
   public allPotentials?: any[];
   public error500: boolean = false;
   public countSuccess: number = 0;
