@@ -9,7 +9,7 @@ import * as $ from 'jquery'
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  public allLeads!: Lead[];
+  public allLeads?: Lead[];
   public error500: boolean = false;
 
   constructor(private _LeadsInfoService:LeadsInfoService) { }
