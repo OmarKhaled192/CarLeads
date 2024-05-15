@@ -43,7 +43,7 @@ and user can press Try Again Button to render home page again.
 
 ![image](https://github.com/OmarKhaled192/car_dealership_App/assets/94392724/d9d34fb0-f4b4-45ae-9e7a-6556aff46ce0)
 
-then we need also to handel error 404 as shown:
+- then we need also to handel error 404 as shown:
 
 ![image](https://github.com/OmarKhaled192/car_dealership_App/assets/94392724/f4f083e9-cca4-4b3b-bb35-5d6a0fbbfb80)
 
